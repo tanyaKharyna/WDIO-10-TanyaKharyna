@@ -40,7 +40,7 @@ describe("Product return", function() {
 
         const title = content.$('h1')
 
-        expect(browser.getUrl()).toContain('route=account/return/success');
+        expect(browser).toHaveUrlContaining('account/return/success');
         expect(title).toHaveText('Product Returns');
     });
   });
@@ -80,8 +80,8 @@ describe("Product return", function() {
 
         const text = $('p=Thank you for purchasing a gift certificate! Once you have completed your order your gift certificate recipient will be sent an e-mail with details how to redeem their gift certificate.');
         const title = content.$('h1');
-
-       expect(browser.getUrl()).toContain('route=account/voucher/success');
+      
+       expect(browser).toHaveUrlContaining('account/voucher/success');
        expect(title).toHaveText('Purchase a Gift Certificate');
        expect(text).toExist();
     });
@@ -110,7 +110,7 @@ describe("Product return", function() {
         const title = content.$('h1');
         const breadcrumbContactUs = $('=Contact Us');
 
-        expect(browser.getUrl()).toContain('information/contact/success');
+        expect(browser).toHaveUrlContaining('information/contact/success');
         expect(title).toHaveText('Contact Us');
         expect(breadcrumbContactUs).toExist();
     });
@@ -145,9 +145,8 @@ describe("Product return", function() {
         const searchBtn = header.$('.input-group-btn button');
         searchBtn.click();
 
-        const noResultsMsg = $('#content p:nth-of-type(2)');
-
-        expect(noResultsMsg).toHaveTextContaining('There is no product that matches the search criteria.');
+        const noResultsMsg = $('p=There is no product that matches the search criteria.');
+        expect(noResultsMsg).toBeDisplayed();
     });
   });
 
