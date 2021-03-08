@@ -44,8 +44,10 @@ describe('REGISTERED USERS can add items to the cart, the comparison, the wishli
      after(function(){
         browser.reloadSession();
      })
+
       /*
-       Data colection should include indexes of items for sale that we want to include in the tests
+      * Data colection should include indexes of items for sale that we want to include in the tests.
+      * Functions below will use the provided indexes to click on the elements of specific elements.
       */
 
       let dataCollection = [1, 2, 3, 4];
@@ -108,13 +110,18 @@ describe('REGISTERED USERS can add items to the cart, the comparison, the wishli
    });
   });
 
-  describe('GUESTS can add items to cart, comparison, wishlish', function(){
+describe('GUESTS can add items to cart, comparison, wishlish', function(){
    
    beforeEach(function(){
       browser.url('/mp3-players');
       browser.setWindowSize(1920, 1080);
-      });
+   });
       
+     /**
+     * Functions in tests click on the elements based on the index of item provided
+     * @param {number} index the index of the element for sale
+     */
+
       it('can be selected for comparison by guest', function () {
          function addToCartByIndex(index: number) {
          const productThumb = $(`div:nth-child(8) div.product-layout:nth-child(${index})`);
@@ -146,4 +153,4 @@ describe('REGISTERED USERS can add items to the cart, the comparison, the wishli
        expect(sucessMsg).toBeDisplayed();
        expect(cartTotal).not.toHaveTextContaining('0 item(s) - $0.00');
       });
-  });
+   });
