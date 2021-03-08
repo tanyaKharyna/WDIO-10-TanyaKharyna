@@ -45,7 +45,7 @@ describe('Items', function () {
  //test 1
       let dataCollection = [1, 2, 3, 4];
       dataCollection.map(data => {
-          it(`item with index No.${data} can be added to wishlist`, function() {
+          it.only(`item with index No.${data} can be added to wishlist`, function() {
             function addToWishlistByIndex(data) {
                browser.url('/mp3-players');
                const allItems = $('#content div.row:nth-child(8)');
@@ -88,7 +88,7 @@ describe('Items', function () {
    
  //test 3      
       dataCollection.map(data => {
-         it.only(`item No. ${data} can be added to cart by registered user`, function() {
+         it(`item No. ${data} can be added to cart by registered user`, function() {
          
             function addToCartByIndex(data:number) {
                browser.url('/mp3-players');
