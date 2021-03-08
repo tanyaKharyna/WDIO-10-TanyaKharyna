@@ -48,10 +48,6 @@ describe('REGISTERED USERS can add items to the cart, the comparison, the wishli
         browser.reloadSession();
    });
 
-      /*
-      * Data colection should include indexes of items for sale that we want to include in the tests.
-      * Functions below will use the provided indexes to click on the elements of specific elements.
-      */
 
       it(`item with index No.${data} can be added to wishlist`, function() {
          function addToWishlistByIndex(data:number) {
