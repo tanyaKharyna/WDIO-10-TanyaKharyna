@@ -59,7 +59,7 @@ describe('REGISTERED USERS can add items to the cart, the comparison, the wishli
                const productThumb = $(`div:nth-child(8) div.product-layout:nth-child(${data})`);
                const addwishlishBtn = productThumb.$('[data-original-title="Add to Wish List"]');
                addwishlishBtn.click();
-            } 
+            };
                addToWishlistByIndex(data);
    
                const totalWishlistItems = $('#wishlist-total span');
@@ -79,7 +79,7 @@ describe('REGISTERED USERS can add items to the cart, the comparison, the wishli
                const productThumb = $(`div:nth-child(8) div.product-layout:nth-child(${data})`);
                const compareBtn = productThumb.$('[data-original-title="Compare this Product"]');
                compareBtn.click();
-            } 
+            };
                compareItemsByIndex(data);
                const successIcon = $('i[class="fa fa-check-circle"]');
                const linkToComparisonPage = $('div.alert-success a:nth-child(3)')
@@ -92,14 +92,14 @@ describe('REGISTERED USERS can add items to the cart, the comparison, the wishli
          });
    
 
-         dataCollection.map(data => {
+      dataCollection.map(data => {
          it(`item No. ${data} can be added to cart by registered user`, function() {
             function addToCartByIndex(data:number) {
                browser.url('/mp3-players');
                const productThumb = $(`div:nth-child(8) div.product-layout:nth-child(${data})`);
                const cartBtn = productThumb.$('button:nth-of-type(1)');
                cartBtn.click();
-           } 
+            };
          addToCartByIndex(data);
 
          const sucessMsg = $('div.alert-success');
@@ -108,7 +108,7 @@ describe('REGISTERED USERS can add items to the cart, the comparison, the wishli
          expect(cartTotal).not.toHaveTextContaining('0 item(s) - $0.00');
          });
    });
-  });
+});
 
 describe('GUESTS can add items to cart, comparison, wishlish', function(){
    
@@ -127,30 +127,30 @@ describe('GUESTS can add items to cart, comparison, wishlish', function(){
          const productThumb = $(`div:nth-child(8) div.product-layout:nth-child(${index})`);
          const compareBtn = productThumb.$('[data-original-title="Compare this Product"]');
          compareBtn.click();
-         }             
-            addToCartByIndex(3);
+         };          
+         
+         addToCartByIndex(3);
 
-            const successIcon = $('i[class="fa fa-check-circle"]');
-            const linkToComparisonPage = $('div.alert-success a:nth-child(3)')
-            const compareTotal = $('#compare-total');
+         const successIcon = $('i[class="fa fa-check-circle"]');
+         const linkToComparisonPage = $('div.alert-success a:nth-child(3)')
+         const compareTotal = $('#compare-total');
 
-            expect(successIcon).toBeDisplayed();
-            expect(linkToComparisonPage).toHaveText('product comparison');
-            expect(compareTotal).not.toHaveTextContaining('Product Compare (0)');
-         })
+         expect(successIcon).toBeDisplayed();
+         expect(linkToComparisonPage).toHaveText('product comparison');
+         expect(compareTotal).not.toHaveTextContaining('Product Compare (0)');
+      });
    
       it('can be added to cart by guest', function () {
          function addToCartByIndex(index:number) {
-            browser.url('/mp3-players');
             const productThumb = $(`div:nth-child(8) div.product-layout:nth-child(${index})`);
             const cartBtn = productThumb.$('button:nth-of-type(1)');
             cartBtn.click();
-        } 
-       addToCartByIndex(2);
+         };
+         addToCartByIndex(2);
 
-       const sucessMsg = $('div.alert-success');
-       const cartTotal = $('#cart-total');
-       expect(sucessMsg).toBeDisplayed();
-       expect(cartTotal).not.toHaveTextContaining('0 item(s) - $0.00');
+         const sucessMsg = $('div.alert-success');
+         const cartTotal = $('#cart-total');
+         expect(sucessMsg).toBeDisplayed();
+         expect(cartTotal).not.toHaveTextContaining('0 item(s) - $0.00');
       });
-   });
+});
