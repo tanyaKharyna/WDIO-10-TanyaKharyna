@@ -4,11 +4,10 @@
 // - use preconditions
 // - use dataprovider
 import * as faker from 'faker';
-import pause from 'webdriverio/build/commands/browser/pause';
 
-describe('Items', function () {
-     // You must be logged in to use wishlist
-     before(function() {
+describe('REGISTERED USERS can add items to the cart, the comparison, the wishlish', function () {
+
+   before(function() {
       browser.url('/index.php?route=account/login');
       browser.setWindowSize(1920, 1080);
       const content = $('#content');
@@ -39,77 +38,112 @@ describe('Items', function () {
 
       const continueButton = content.$('[value="Continue"]');
       continueButton.click();
-      browser.setWindowSize(1920, 1080)
-      
+      browser.setWindowSize(1920, 1080);
+     });
+
+     after(function(){
+        browser.reloadSession();
      })
- //test 1
+      /*
+       Data colection should include indexes of items for sale that we want to include in the tests
+      */
+
       let dataCollection = [1, 2, 3, 4];
+
       dataCollection.map(data => {
-          it.only(`item with index No.${data} can be added to wishlist`, function() {
-            function addToWishlistByIndex(data) {
+          it(`item with index No.${data} can be added to wishlist`, function() {
+            function addToWishlistByIndex(data:number) {
                browser.url('/mp3-players');
-               const allItems = $('#content div.row:nth-child(8)');
-               const compareBtn = allItems.$(`div:nth-child(${data}) [data-original-title="Add to Wish List"]`);
-               compareBtn.click()
+               const productThumb = $(`div:nth-child(8) div.product-layout:nth-child(${data})`);
+               const addwishlishBtn = productThumb.$('[data-original-title="Add to Wish List"]');
+               addwishlishBtn.click();
             } 
                addToWishlistByIndex(data);
    
-               const successWishlist = $('//*[@id="product-product"]/div[1]');
-               const message = $('//*[@id="product-product"]/div[1]/text()[1]');
                const totalWishlistItems = $('#wishlist-total span');
                const successIcon = $('i[class="fa fa-check-circle"]');
-   
+               const sucessMsg = $('div.alert-success');
+
+               expect(sucessMsg).toBeDisplayed();
                expect(successIcon).toBeDisplayed();
-               //expect(successIcon).toHaveTextContaining(' Success: You have added ');
                expect(totalWishlistItems).not.toHaveText('Wish List (0)');
           });
       });
       
-//test 2
       dataCollection.map(data => {
          it(`item with index No.${data} can be selected for comparison by registered user`, function() {
             function compareItemsByIndex(data:number) {
                browser.url('/mp3-players');
-               const allItems = $('#content div.row:nth-child(8)');
-               const compareBtn = allItems.$(`div:nth-child(${data}) [data-original-title="Compare this Product"]`);
+               const productThumb = $(`div:nth-child(8) div.product-layout:nth-child(${data})`);
+               const compareBtn = productThumb.$('[data-original-title="Compare this Product"]');
                compareBtn.click();
-          } 
-         compareItemsByIndex(data);
+            } 
+               compareItemsByIndex(data);
+               const successIcon = $('i[class="fa fa-check-circle"]');
+               const linkToComparisonPage = $('div.alert-success a:nth-child(3)')
+               const compareTotal = $('#compare-total');
 
-         const successIcon = $('i[class="fa fa-check-circle"]');
-         const linkToComparisonPage = $('div.alert.alert-success.alert-dismissible a:nth-child(3)')
-         const compareTotal = $('#compare-total');
-
-         expect(successIcon).toBeDisplayed();
-         expect(linkToComparisonPage).toHaveText('product comparison');
-         expect(compareTotal).not.toHaveTextContaining('Product Compare (0)');
+               expect(successIcon).toBeDisplayed();
+               expect(linkToComparisonPage).toHaveText('product comparison');
+               expect(compareTotal).not.toHaveTextContaining('Product Compare (0)');
+            });
          });
-      });
    
- //test 3      
-      dataCollection.map(data => {
+
+         dataCollection.map(data => {
          it(`item No. ${data} can be added to cart by registered user`, function() {
-         
             function addToCartByIndex(data:number) {
                browser.url('/mp3-players');
-               const allItems = $('#content div.row:nth-child(8)');
-               const cartBtn = allItems.$(`div:nth-child(${data})div.button-group button:nth-child(1)`);
+               const productThumb = $(`div:nth-child(8) div.product-layout:nth-child(${data})`);
+               const cartBtn = productThumb.$('button:nth-of-type(1)');
                cartBtn.click();
-          } 
+           } 
          addToCartByIndex(data);
-         browser.pause(3000)
+
+         const sucessMsg = $('div.alert-success');
+         const cartTotal = $('#cart-total');
+         expect(sucessMsg).toBeDisplayed();
+         expect(cartTotal).not.toHaveTextContaining('0 item(s) - $0.00');
          });
-   })
-     
+   });
+  });
 
+  describe('GUESTS can add items to cart, comparison, wishlish', function(){
+   
+   beforeEach(function(){
+      browser.url('/mp3-players');
+      browser.setWindowSize(1920, 1080);
+      });
+      
+      it('can be selected for comparison by guest', function () {
+         function addToCartByIndex(index: number) {
+         const productThumb = $(`div:nth-child(8) div.product-layout:nth-child(${index})`);
+         const compareBtn = productThumb.$('[data-original-title="Compare this Product"]');
+         compareBtn.click();
+         }             
+            addToCartByIndex(3);
 
-     it.skip('can be selected for comparison by guest', function () {
-        browser.pause(3000)
-     })
-  
-     it.skip('can be added to cart by guest', function () {
-  
-     })
-  
-    
-  })
+            const successIcon = $('i[class="fa fa-check-circle"]');
+            const linkToComparisonPage = $('div.alert-success a:nth-child(3)')
+            const compareTotal = $('#compare-total');
+
+            expect(successIcon).toBeDisplayed();
+            expect(linkToComparisonPage).toHaveText('product comparison');
+            expect(compareTotal).not.toHaveTextContaining('Product Compare (0)');
+         })
+   
+      it('can be added to cart by guest', function () {
+         function addToCartByIndex(index:number) {
+            browser.url('/mp3-players');
+            const productThumb = $(`div:nth-child(8) div.product-layout:nth-child(${index})`);
+            const cartBtn = productThumb.$('button:nth-of-type(1)');
+            cartBtn.click();
+        } 
+       addToCartByIndex(2);
+
+       const sucessMsg = $('div.alert-success');
+       const cartTotal = $('#cart-total');
+       expect(sucessMsg).toBeDisplayed();
+       expect(cartTotal).not.toHaveTextContaining('0 item(s) - $0.00');
+      });
+  });
