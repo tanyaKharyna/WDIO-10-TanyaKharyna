@@ -62,9 +62,9 @@ describe('REGISTERED USERS can add items to the cart, the comparison, the wishli
                const successIcon = $('i[class="fa fa-check-circle"]');
                const sucessMsg = $('div.alert-success');
 
-               expect(sucessMsg).toBeDisplayed();
-               expect(successIcon).toBeDisplayed();
-               expect(totalWishlistItems).not.toHaveText('Wish List (0)');
+               expect(sucessMsg).toBeDisplayed({message: 'Success message was not displayed'});
+               expect(successIcon).toBeDisplayed({message: 'Success icon was not displayed'});
+               expect(totalWishlistItems).not.toHaveText('Wish List (0)', { message: `Text on the wishListLabel didn't matched, received ${totalWishlistItems.getText()}`});
       });
    
       
@@ -80,9 +80,9 @@ describe('REGISTERED USERS can add items to the cart, the comparison, the wishli
                const linkToComparisonPage = $('div.alert-success a:nth-child(3)')
                const compareTotal = $('#compare-total');
 
-               expect(successIcon).toBeDisplayed();
-               expect(linkToComparisonPage).toHaveText('product comparison');
-               expect(compareTotal).not.toHaveTextContaining('Product Compare (0)');
+               expect(successIcon).toBeDisplayed({ message: 'Success icon was not displayed'});
+               expect(linkToComparisonPage).toHaveText('product comparison', { message: `Incorrect path in the sucess message, received ${linkToComparisonPage.getText()}`} );
+               expect(compareTotal).not.toHaveTextContaining('Product Compare (0)',{ message: `Text on the compareLabel didn't matched, received ${compareTotal.getText()}`});
       });
       
      
@@ -97,9 +97,8 @@ describe('REGISTERED USERS can add items to the cart, the comparison, the wishli
 
                const sucessMsg = $('div.alert-success');
                const cartTotal = $('#cart-total');
-               expect(sucessMsg).toBeDisplayed();
-               expect(cartTotal).not.toHaveTextContaining('0 item(s) - $0.00');
-      });
+               expect(sucessMsg).toBeDisplayed({message: 'Sucess message was not displayed'});
+               expect(cartTotal).not.toHaveTextContaining('0 item(s) - $0.00', {message: `Text on the cart was not correct,  received ${cartTotal.getText()}`});      });
    });
 });
 
@@ -128,9 +127,9 @@ describe('GUESTS can add items to cart, comparison, wishlish', function(){
          const linkToComparisonPage = $('div.alert-success a:nth-child(3)')
          const compareTotal = $('#compare-total');
 
-         expect(successIcon).toBeDisplayed();
-         expect(linkToComparisonPage).toHaveText('product comparison');
-         expect(compareTotal).not.toHaveTextContaining('Product Compare (0)');
+         expect(successIcon).toBeDisplayed({message: 'Success icon was not displayed'});
+         expect(linkToComparisonPage).toHaveText('product comparison', { message: `Incorrect path in the sucess message, received ${linkToComparisonPage.getText()}`} );
+         expect(compareTotal).not.toHaveTextContaining('Product Compare (0)',{ message: `Text on the compareLabel didn't matched, received ${compareTotal.getText()}`});
       });
    
       it('can be added to cart by guest', function () {
@@ -143,7 +142,7 @@ describe('GUESTS can add items to cart, comparison, wishlish', function(){
 
        const sucessMsg = $('div.alert-success');
        const cartTotal = $('#cart-total');
-       expect(sucessMsg).toBeDisplayed();
-       expect(cartTotal).not.toHaveTextContaining('0 item(s) - $0.00');
+       expect(sucessMsg).toBeDisplayed({message: 'Sucess message was not displayed'});
+       expect(cartTotal).not.toHaveTextContaining('0 item(s) - $0.00', {message: `Text on the cart was not correct,  received ${cartTotal.getText()}`});
       });
 });
