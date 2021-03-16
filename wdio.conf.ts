@@ -1,4 +1,4 @@
-exports.config = {
+export const config = {
     //
     // ====================
     // Runner Configuration
@@ -17,7 +17,8 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './test/specs/**/homework4.e2e.ts'
+       // './test/specs/**/checkout.spec.ts'
+       './test/specs/**/lesson4.spec.ts'
     ],
     // Patterns to exclude.
     exclude: [
@@ -90,7 +91,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'http://93.126.97.71:10082/',
+    baseUrl: 'http://93.126.97.71:10082',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -199,8 +200,8 @@ exports.config = {
     /**
      * Function to be executed before a test (in Mocha/Jasmine) starts.
      */
-    // beforeTest: function (test, context) {
-    // },
+    beforeTest: function (test, context) {
+       browser.url('/')},
     /**
      * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
      * beforeEach in Mocha)
@@ -216,8 +217,9 @@ exports.config = {
     /**
      * Function to be executed after a test (in Mocha/Jasmine).
      */
-    // afterTest: function(test, context, { error, result, duration, passed, retries }) {
-    // },
+     afterTest: function(test, context, { error, result, duration, passed, retries }) {
+     browser.reloadSession()
+     },
 
 
     /**
