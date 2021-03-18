@@ -25,7 +25,8 @@ export class ShippingDetailsComponent {
         this.root.$('#input-shipping-city').setValue(data.city);
         this.root.$('#input-shipping-postcode').setValue(data.postCode);
         this.root.$('#input-shipping-country').selectByVisibleText(data.country);
-        /*browser.waitUntil(
+        /* Тут я теж не розумію, як мені зробити вейт 
+        browser.waitUntil(
             () =>$('#input-payment-zone').selectByVisibleText(data.region),
             {
                 timeout: 3000,
