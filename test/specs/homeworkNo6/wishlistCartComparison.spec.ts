@@ -1,5 +1,5 @@
 import *as faker from 'faker';
-import { App } from '../../applictation/application';
+import { App } from '../../../application/application';
 
 describe('REGISTERED USERS can add items to the cart, the comparison, the wishlish', function() {
     
@@ -48,7 +48,8 @@ describe('REGISTERED USERS can add items to the cart, the comparison, the wishli
 });
 
 describe('GUESTS can add items to the cart, the comparison, the wishlish', function() {
-  /**
+  /** Саша, а чому в мене цей біфорІч не спрацьовує, не розумію
+  * 
   *  beforeEach(function(){
         const app = new App();
         app.home.openAllForCategory('MP3 Players');
@@ -62,7 +63,6 @@ describe('GUESTS can add items to the cart, the comparison, the wishlish', funct
 
             ipodClassic.compareThisProduct();
             expect(app.productCategory.successIcon).toBeDisplayed();
-            //expect(app.productCategory.linkComparePage).toContain('product comparison')
         });
 
         it('can be added to cart by guest', function () {

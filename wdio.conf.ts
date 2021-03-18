@@ -17,8 +17,10 @@ export const config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-       // './test/specs/**/checkout.spec.ts'
-       './test/specs/**/lesson4.spec.ts'
+     './test/specs/homeworkNo6/**/***.spec.ts'
+       //'./test/specs/**/returnCertificateContactForms.spec.ts'
+
+       //test\specs\returnCertificateContactForms.spec.ts
     ],
     // Patterns to exclude.
     exclude: [
@@ -91,7 +93,7 @@ export const config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'http://93.126.97.71:10082',
+    baseUrl: 'http://93.126.97.71:10082/',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,

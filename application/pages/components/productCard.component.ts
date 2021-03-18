@@ -10,8 +10,7 @@ export class ProductCartComponent {
     addToCart() {
         const addCartButton = this.root.$('button[onclick*="cart.add"] i.fa-shopping-cart');
         expect(addCartButton).toBeVisible({message: 'Expected to see the Add to button cart'});
-        addCartButton.click();
-       
+        addCartButton.click();       
     }
 
     addToWishlist(){
