@@ -48,13 +48,7 @@ describe('REGISTERED USERS can add items to the cart, the comparison, the wishli
 });
 
 describe('GUESTS can add items to the cart, the comparison, the wishlish', function() {
-  /** Саша, а чому в мене цей біфорІч не спрацьовує, не розумію
-  * 
-  *  beforeEach(function(){
-        const app = new App();
-        app.home.openAllForCategory('MP3 Players');
-    })
-  */
+ 
         it('can be selected for comparison by guest', function () {
             const app = new App();
             app.home.openAllForCategory('MP3 Players');

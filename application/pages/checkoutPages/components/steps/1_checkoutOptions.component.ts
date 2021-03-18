@@ -19,14 +19,14 @@ export class CheckoutOtionsComponent {
     continue() {
         browser.pause(3000);
         const continueButton = this.root.$('input[type="button"][value="Continue"]#button-account');
+        continueButton.click();
         // Саша,я чомусь так і не змогла добитись тут таймауту без browser.pause(). тест падає через "element not interactable"
         //Нище варінти, які я пробувала
         //
         //continueButton.waitForClickable({ timeout: 10000 });
         //continueButton.waitForDisplayed({ timeout: 5000 });
         //browser.waitUntil(() => return continueButton.isDisplayed(), {
-        //timeoutMsg: "Expected Confirmation page to be loaded"
+        //timeoutMsg: "Expected Continue button to be loaded"
         //});
-        continueButton.click()
     }
 }
