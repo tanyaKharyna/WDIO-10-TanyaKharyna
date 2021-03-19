@@ -4,9 +4,10 @@ export class ConfirmOrderComponent {
     }
 
     continue() {
-        browser.pause(500)
         const continueButton = this.root.$('input[type="button"][value="Confirm Order"]#button-confirm');
-        expect(continueButton).toBeClickable({ message: 'Expected Confirm Order button to be visible' });
+        continueButton.waitForDisplayed(
+            { timeout: 5000 },
+            { message: 'Expected Continue button to be visible'});
         continueButton.click();
     }
 }

@@ -1,15 +1,11 @@
-import { Touchscreen } from "../../../../node_modules/puppeteer-core/lib/cjs/puppeteer/common/Input";
-
 export class CerfiticateFormComponent {
 
     private get root(): WebdriverIO.Element{
-        return $('#content')
-    } 
-
-    
+        return $('#content');
+    }
 
     continue() {
-        browser.pause(500)
+        browser.pause(500);
         const continueButton = this.root.$('input[type="submit"][value="Continue"]');
         expect(continueButton).toBeClickable({ message: 'Expected Continue button to be visible' });
         continueButton.click();
@@ -36,7 +32,7 @@ export class CerfiticateFormComponent {
         recipientEmail: string,
         sendersName: string,
         sendersEmail: string,
-        message: string,    
+        message: string,
     }){
         console.log('[CertificateFormComponent] Generating data to order a certificate', JSON.stringify(data, null, 2));
         this.root.$('#input-to-name').setValue(data.recipientsName);
@@ -50,5 +46,5 @@ export class CerfiticateFormComponent {
         this.continue();
     }
 
-   
+
 }

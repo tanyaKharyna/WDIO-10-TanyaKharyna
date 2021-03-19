@@ -7,11 +7,11 @@ export class HomePage {
     //searchBar: SearchBarComponent = new SearchBarComponent()
 
     openAllForCategory(categoryName: string) {
-        $(`a=${categoryName}`).click()
+        $(`a=${categoryName}`).click();
 
-        const openedSeeAllLink = $('.dropdown.open .see-all')
-        expect(openedSeeAllLink).toBeVisible()
+        const openedSeeAllLink = $('.dropdown.open .see-all');
+        expect(openedSeeAllLink).toBeVisible();
 
-        openedSeeAllLink.click()
+        openedSeeAllLink.click();
     }
 }

@@ -7,11 +7,8 @@ export class SearchResultPage {
         browser.url('index.php?route=product/search');
     }
 
-    get searchBarComponent() {
-        return new SearchBarComponent();
-    }
+    searchBarComponent = new SearchBarComponent();
 
-    get itemsFound() {
-        return new ItemsFoundComponent();
-    }
+    itemsFound = new ItemsFoundComponent();
+
 }

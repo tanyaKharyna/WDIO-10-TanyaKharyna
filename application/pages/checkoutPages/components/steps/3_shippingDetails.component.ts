@@ -1,5 +1,5 @@
 export class ShippingDetailsComponent {
-    
+
     private get root(): WebdriverIO.Element {
         return $('div#collapse-shipping-address').parentElement();
     }
@@ -25,23 +25,23 @@ export class ShippingDetailsComponent {
         this.root.$('#input-shipping-city').setValue(data.city);
         this.root.$('#input-shipping-postcode').setValue(data.postCode);
         this.root.$('#input-shipping-country').selectByVisibleText(data.country);
-        /* Тут я теж не розумію, як мені зробити вейт 
-        browser.waitUntil(
-            () =>$('#input-payment-zone').selectByVisibleText(data.region),
-            {
-                timeout: 3000,
-                timeoutMsg: 'Expected to selected the city after 3s'
-            }
-        );
-        */
-        browser.pause(2000);
-        this.root.$('#input-shipping-zone').selectByVisibleText(data.region);
+        browser.waitUntil(() => {
+            try {
+                this.root.$('#input-shipping-zone').selectByVisibleText(data.region);
+                return true;
+            } catch {
+                return false;
+            }},
+        { timeout: 4000,
+            timeoutMsg: 'Expected to selected the city after 4s'
+        });
     }
-    
+
     continue() {
-        browser.pause(500)
         const continueButton = this.root.$('input[type="button"][value="Continue"]');
-        expect(continueButton).toBeClickable({ message: 'Expected Continue button to be visible' });
+        continueButton.waitForDisplayed(
+            { timeout: 5000 },
+            { message: 'Expected Continue button to be visible'});
         continueButton.click();
     }
 }

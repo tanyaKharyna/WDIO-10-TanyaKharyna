@@ -1,7 +1,7 @@
 import { ReturnFormComponent } from "./components/returnForm.component";
 
 export class ReturnPage {
-    
+
     open(){
         browser.url('index.php?route=account/return/add');
     }
@@ -10,5 +10,4 @@ export class ReturnPage {
         return new ReturnFormComponent();
     }
 
-    
 }

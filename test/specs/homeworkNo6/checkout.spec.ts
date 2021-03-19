@@ -1,12 +1,7 @@
 import { App } from "../../../application/application";
-import*as faker from 'faker'; 
-
+import*as faker from 'faker';
 
 describe('Items checkout', function() {
-    
-    beforeEach( function (){
-        browser.reloadSession();
-    }); 
 
     it('can be purchased by guest', function() {
         const app = new App();
@@ -41,37 +36,37 @@ describe('Items checkout', function() {
         app.checkout.paymentMethod.continue();
 
         app.checkout.confirmOrder.continue();
-    
-        browser.waitUntil(() => app.confirmation.isOpened(), {
-         timeoutMsg: "Expected Confirmation page to be loaded"
-      });
-     })
 
-     it('can be purchased by registered user',function(){
+        browser.waitUntil(() => app.confirmation.isOpened(), {
+            timeoutMsg: "Expected Confirmation page to be visible"
+        });
+    });
+
+    it('can be purchased by registered user',function(){
         const app = new App();
 
         app.home.openAllForCategory('MP3 Players');
 
-        const iPodShuffle = app.productCategory.products.find(product => product.title() === 'iPod Shuffle')
+        const iPodShuffle = app.productCategory.products.find(product => product.title() === 'iPod Shuffle');
         expect(iPodShuffle).toBeDefined();
-        
+
         iPodShuffle.addToCart();
 
         app.checkout.open();
 
         app.checkout.checkoutOptions.selectRegisterAccount();
-        app.checkout.checkoutOptions.continue()
+        app.checkout.checkoutOptions.continue();
 
-       app.checkout.billingDetailsCommon.fillBillingDetails({
-        firstName:  faker.name.firstName(),
-        lastName:  faker.name.lastName(),
-        email: faker.internet.email(),
-        telephone: faker.phone.phoneNumber(),
-        address1: faker.address.streetName(),
-        city: faker.address.city(),
-        postCode: faker.address.zipCode(),
-        country: 'Sweden',
-        region: 'Stockholm'
+        app.checkout.billingDetailsCommon.fillBillingDetails({
+            firstName:  faker.name.firstName(),
+            lastName:  faker.name.lastName(),
+            email: faker.internet.email(),
+            telephone: faker.phone.phoneNumber(),
+            address1: faker.address.streetName(),
+            city: faker.address.city(),
+            postCode: faker.address.zipCode(),
+            country: 'Sweden',
+            region: 'Stockholm'
         });
 
         const passString = faker.internet.password();
@@ -90,19 +85,19 @@ describe('Items checkout', function() {
         app.checkout.confirmOrder.continue();
 
         browser.waitUntil(() => app.confirmation.isOpened(), {
-         timeoutMsg: "Expected Confirmation page to be loaded"
-      });
-     });
+            timeoutMsg: "Expected Confirmation page to be loaded"
+        });
+    });
 
 
-     it('can purchased by guest with different billing and shipping addresses',function(){
+    it.only('can purchased by guest with different billing and shipping addresses',function(){
         const app = new App();
 
         app.home.openAllForCategory('MP3 Players');
 
         const iPodShuffle = app.productCategory.products.find(product => product.title() === 'iPod Shuffle');
         expect(iPodShuffle).toBeDefined();
-        
+
         iPodShuffle.addToCart();
 
         app.checkout.open();
@@ -120,6 +115,7 @@ describe('Items checkout', function() {
             country: 'Togo',
             region: 'Kara',
         });
+
         app.checkout.billingDetailsCommon.chooseDiffDeliveryAdress();
         app.checkout.billingDetailsCommon.continue();
 
@@ -135,16 +131,17 @@ describe('Items checkout', function() {
         app.checkout.shippingDetails.continue();
 
         app.checkout.deliveryMethod.continue();
-        
+
         app.checkout.paymentMethod.acceptTermsAndConditions();
         app.checkout.paymentMethod.continue();
 
         app.checkout.confirmOrder.continue();
-        
+
         browser.waitUntil(() => app.confirmation.isOpened(), {
-         timeoutMsg: "Expected Confirmation page to be loaded"
-      });
+            timeoutMsg: "Expected Confirmation page to be loaded"
+        });
+
     });
 
 
-})
+});

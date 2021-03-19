@@ -7,7 +7,7 @@ export class ReasonsReturnComponent {
     deadOnArrival(){
         return this.root[0].click();
     }
-        
+
     faulty(){
         return this.root[1].click();
     }
@@ -15,12 +15,12 @@ export class ReasonsReturnComponent {
     orderError(){
         return this.root[2].click();
     }
-        
+
     otherReason(){
         return this.root[3].click();
     }
-    
+
     receivedWrongItem(){
         return this.root[4].click();
     }
-} 
+}

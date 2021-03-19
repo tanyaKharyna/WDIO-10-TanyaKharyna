@@ -1,6 +1,6 @@
 export class PaymentMethodComponent {
     private get root(): WebdriverIO.Element {
-        return $('div#collapse-payment-method').parentElement()
+        return $('div#collapse-payment-method').parentElement();
     }
 
     acceptTermsAndConditions() {
@@ -10,9 +10,10 @@ export class PaymentMethodComponent {
     }
 
     continue() {
-        browser.pause(500);
         const continueButton = this.root.$('input[type="button"][value="Continue"]#button-payment-method');
-        expect(continueButton).toBeClickable({ message: 'Expected Continue button to be visible' });
+        continueButton.waitForDisplayed(
+            { timeout: 5000 },
+            {message: 'Expected Continue button to be visible'});
         continueButton.click();
     }
 }

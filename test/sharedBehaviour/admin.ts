@@ -1,4 +1,4 @@
-import {shared} from './user'
+import {shared} from './user';
 
 
 describe('Admin', function () {
@@ -9,8 +9,8 @@ describe('Admin', function () {
         const notesTitle = 'Hi, this is my first note';
         addnoteBtn.click();
         titleInput.setValue(notesTitle);
-        expect(titleInput).toHaveText(notesTitle, {message: `Received title was ${titleInput.getText()}`})
-    })
+        expect(titleInput).toHaveText(notesTitle, {message: `Received title was ${titleInput.getText()}`});
+    });
 
     shared({name: 'abby.faker@gmail.com', password: 'faker2021'});
-})
+});

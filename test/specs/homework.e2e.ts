@@ -29,7 +29,7 @@ describe("Product return", function() {
         const productCode = content.$('#input-model');
         productCode.setValue(faker.commerce.product());
 
-        const reasonForReturn = $('input[type="radio"][value="2"]')
+        const reasonForReturn = $('input[type="radio"][value="2"]');
         reasonForReturn.click();
 
         const comment = content.$('#input-comment');
@@ -38,16 +38,16 @@ describe("Product return", function() {
         const submitButton = content.$('[value="Submit"]');
         submitButton.click();
 
-        const title = content.$('h1')
+        const title = content.$('h1');
 
         expect(browser).toHaveUrlContaining('account/return/success');
         expect(title).toHaveText('Product Returns');
     });
-  });
+});
 
-  // http://93.126.97.71:10082/index.php?route=account/voucher
-  // this test gives you 20 points
-  describe("Gift Certificate", function() {
+// http://93.126.97.71:10082/index.php?route=account/voucher
+// this test gives you 20 points
+describe("Gift Certificate", function() {
     it("can be purchased", function() {
         const url = '/index.php?route=account/voucher';
         browser.url(url);
@@ -75,24 +75,24 @@ describe("Product return", function() {
         const agreeCheckbox = content.$('input[name="agree"]');
         agreeCheckbox.click();
 
-        const submitButton = content.$('input[type="submit"][value="Continue"]')
+        const submitButton = content.$('input[type="submit"][value="Continue"]');
         submitButton.click();
 
         const text = $('p=Thank you for purchasing a gift certificate! Once you have completed your order your gift certificate recipient will be sent an e-mail with details how to redeem their gift certificate.');
         const title = content.$('h1');
-      
-       expect(browser).toHaveUrlContaining('account/voucher/success');
-       expect(title).toHaveText('Purchase a Gift Certificate');
-       expect(text).toExist();
-    });
-  });   
 
-  // this test gives you 20 points
-  // http://93.126.97.71:10082/index.php?route=information/contact
-  describe("Contact us form", function() {
+        expect(browser).toHaveUrlContaining('account/voucher/success');
+        expect(title).toHaveText('Purchase a Gift Certificate');
+        expect(text).toExist();
+    });
+});
+
+// this test gives you 20 points
+// http://93.126.97.71:10082/index.php?route=information/contact
+describe("Contact us form", function() {
     it("must send messages to shop administration", function() {
         browser.url('/index.php?route=information/contact');
-        
+
         const content = $('#content');
 
         const name = content.$('#input-name');
@@ -104,7 +104,7 @@ describe("Product return", function() {
         const enquiry = content.$('#input-enquiry');
         enquiry.setValue(faker.lorem.paragraph(1));
 
-        const submitButton = $('input[type="submit"][value="Submit"]')
+        const submitButton = $('input[type="submit"][value="Submit"]');
         submitButton.click();
 
         const title = content.$('h1');
@@ -114,23 +114,23 @@ describe("Product return", function() {
         expect(title).toHaveText('Contact Us');
         expect(breadcrumbContactUs).toExist();
     });
-  });
+});
 
-  describe("Items search", function() {
+describe("Items search", function() {
     it("should show results in case multiple items matches", function() {
-      browser.url('/');
+        browser.url('/');
 
-      const header = $('header');
-      const searchBar= header.$('[name="search"]');
-      const searchStr = 'Mac';
-      searchBar.setValue(searchStr);
+        const header = $('header');
+        const searchBar= header.$('[name="search"]');
+        const searchStr = 'Mac';
+        searchBar.setValue(searchStr);
 
-      const searchBtn = header.$('.input-group-btn button');
-      searchBtn.click();
+        const searchBtn = header.$('.input-group-btn button');
+        searchBtn.click();
 
-      const results = $$('h4 a');
-      expect(results).toHaveTextContaining(searchStr);
-     // expect(browser.getUrl()).toContain(searchStr);
+        const results = $$('h4 a');
+        expect(results).toHaveTextContaining(searchStr);
+        // expect(browser.getUrl()).toContain(searchStr);
     });
 
     it("should redirect to 'no matching results' in case no items matched", function () {
@@ -141,12 +141,11 @@ describe("Product return", function() {
         const searchBar= header.$('[name="search"]');
         const searchStr = 'mon-existed producr';
         searchBar.setValue(searchStr);
-  
+
         const searchBtn = header.$('.input-group-btn button');
         searchBtn.click();
 
         const noResultsMsg = $('p=There is no product that matches the search criteria.');
         expect(noResultsMsg).toBeDisplayed();
     });
-  });
-
+});

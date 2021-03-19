@@ -4,7 +4,7 @@ export class SearchBarComponent {
         return $('div#search');
     }
 
-    search(text: String) {
+    search(text: string) {
         const searchInput = this.root.$('input[type="text"][name="search"]');
         expect(searchInput).toBeDisplayed({message: 'Expected Search bar to be visible'});
         const searchBtn = this.root.$(' button[type="button"] ');

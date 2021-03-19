@@ -7,7 +7,7 @@ export class BillingDetailsCommonComponent{
     }
 
     get billingDetailsForNewUsers(){
-        return new BillingDetailsForNewUsers()
+        return new BillingDetailsForNewUsers();
     }
 
     fillBillingDetails(data: {
@@ -30,8 +30,16 @@ export class BillingDetailsCommonComponent{
         this.root.$('#input-payment-city').setValue(data.city);
         this.root.$('#input-payment-postcode').setValue(data.postCode);
         this.root.$('#input-payment-country').selectByVisibleText(data.country);
-        browser.pause(3000);
-        this.root.$('#input-payment-zone').selectByVisibleText(data.region);
+        browser.waitUntil(() => {
+            try {
+                this.root.$('#input-payment-zone').selectByVisibleText(data.region);
+                return true;
+            } catch {
+                return false;
+            }},
+        { timeout: 8000,
+            timeoutMsg: 'Expected to selected the city after 3s'
+        });
     }
 
     isDeliveryBilingAddressSame(): boolean{
@@ -39,14 +47,16 @@ export class BillingDetailsCommonComponent{
     }
 
     chooseDiffDeliveryAdress(){
-        const checkbox =  this.root.$('input[type="checkbox"][name="shipping_address"]')
+        const checkbox =  this.root.$('input[type="checkbox"][name="shipping_address"]');
         checkbox.click();
         expect(checkbox).not.toBeSelected({ message: 'Expected Different billing and delivery address to be not selected after a click'});
     }
 
     continue() {
         const continueButton = this.root.$('input[type="button"][value="Continue"]');
-        expect(continueButton).toBeClickable({ message: 'Expected Continue button to be visible' });
+        continueButton.waitForDisplayed(
+            { timeout: 5000 },
+            {message: 'Expected Continue button to be visible'});
         continueButton.click();
     }
 

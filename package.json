@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "wdio wdio.conf.ts"
+    "test": "wdio wdio.conf.ts",
+    "eslint": "npx eslint .",
+    "eslintFix": "npx eslint --fix "
   },
   "author": "",
   "license": "ISC",
@@ -17,7 +19,10 @@
     "ts-node": "^9.1.1",
     "typescript": "^4.2.2",
     "wdio-chromedriver-service": "^7.0.0",
-    "webdriverio": "^7.0.9"
+    "webdriverio": "^7.0.9",
+    "@typescript-eslint/eslint-plugin": "^4.6.1",
+    "@typescript-eslint/parser": "^4.6.1",
+    "eslint": "^7.13.0"
   },
   "dependencies": {
     "@types/faker": "^5.1.7",

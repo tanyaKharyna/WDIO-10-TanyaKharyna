@@ -1,15 +1,13 @@
-import { Touchscreen } from "../../node_modules/puppeteer-core/lib/cjs/puppeteer/common/Input";
-
 export class ContactUsPage {
 
     open(){
         browser.url('index.php?route=information/contact');
     }
 
-    /** 
-     * @todo: Rewrite code below as PageComponent 
+    /**
+     * @todo: Rewrite code below as PageComponent
      */
-    
+
     get root() {
         return $('#content');
     }

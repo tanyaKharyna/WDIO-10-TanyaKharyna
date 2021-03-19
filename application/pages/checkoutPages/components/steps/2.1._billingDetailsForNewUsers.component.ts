@@ -1,4 +1,4 @@
-    /**
+/**
      * Applicable if a user creates an account while placing an order
      */
 
@@ -8,7 +8,7 @@ export class BillingDetailsForNewUsers {
         return $('div#collapse-payment-address').parentElement();
     }
 
-    setPassword(password: String) {
+    setPassword(password: string) {
         this.root.$('input[type="password"]#input-payment-password').setValue(password);
         this.root.$('input[type="password"]#input-payment-confirm').setValue(password);
     }
@@ -16,7 +16,7 @@ export class BillingDetailsForNewUsers {
     agreeReceiveNewsletter() {
         const checkbox =  this.root.$('input[type="checkbox"][name="newsletter"]');
         checkbox.click();
-        
+
     }
 
     agreeTermsAndCondtitions() {

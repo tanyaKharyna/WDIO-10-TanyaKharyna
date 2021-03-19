@@ -23,7 +23,7 @@ export class CheckoutPage {
     get billingDetailsForNewUsers() {
         return new BillingDetailsForNewUsers();
     }
-    
+
     get shippingDetails() {
         return new ShippingDetailsComponent();
     }
