@@ -28,4 +28,30 @@ export class RegisterAccountComponent {
         this.root.$('[name="agree"]').click();
         this.continue();
     }
+
+    returnUser(user: {
+            firstName: string,
+            lastName: string,
+            email: string,
+            telephone: string,
+            password: string,
+            acceptTermsAndConditions: true
+            }) {
+        console.log('REGISTRATION!');
+        browser.url('/index.php?route=account/register');
+        document.querySelector('input#input-firstname').value = user.firstName;
+        document.querySelector('input#input-lastname').value = user.lastName;
+        document.querySelector('input#input-email').value = user.email;
+        document.querySelector('input#input-telephone').value = user.telephone;
+        document.querySelector('input#input-password').value = user.password;
+        document.querySelector('input#input-confirm').value = user.password;
+
+        if(user.acceptTermsAndConditions) {
+            // @ts-ignore
+            document.querySelector('input[type="checkbox"][name="agree"]').click();
+        }
+        // @ts-ignore
+        document.querySelector('input[type="submit"][value="Continue"]').click();
+        return user;
+    }
 }

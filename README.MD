@@ -31,26 +31,3 @@ Run e2e tests:
 ```bash
 npm test
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
