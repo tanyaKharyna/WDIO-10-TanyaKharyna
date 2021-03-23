@@ -17,7 +17,7 @@ export const config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './test/specs/homeworkNo6/**/search.spec.ts'
+        './test/specs/homeworkNo6/**/executeJS.spec.ts'
         //'./test/specs/**/returnCertificateContactForms.spec.ts'
 
         //test\specs\returnCertificateContactForms.spec.ts
@@ -69,7 +69,7 @@ export const config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'silent',
+    logLevel: 'info',
     //
     // Set specific log levels per logger
     // loggers:

@@ -4,15 +4,15 @@ export function registerUserWithScript(data: {
     email: string,
     password: string,
     telephone: string,
-    acceptTermsAndConditions: boolean}
-){
-    const user:any = {
-        firstName: data.firstName,
-        lastName: data.lastName,
-        email: data.email,
-        password: data.password,
-        telephone: data.telephone,
-        acceptTermsAndConditions: data.acceptTermsAndConditions
+    acceptTermsAndConditions: boolean,
+}){
+    const user = new function(){
+        this.firstName = data.firstName;
+        this.lastName = data.lastName;
+        this.email = data.email;
+        this.password = data.password;
+        this.telephone = data.telephone;
+        this.acceptTermsAndConditions= data.acceptTermsAndConditions;
     };
 
     browser.execute(function (_user) {
@@ -25,16 +25,15 @@ export function registerUserWithScript(data: {
         document.querySelector('input#input-password').value = _user.password;
         document.querySelector('input#input-confirm').value = _user.password;
 
-        if(user.acceptTermsAndConditions){
+        if (_user.acceptTermsAndConditions) {
             // @ts-ignore
-            document.querySelector ('input[type="checkbox"][name="agree"]').click();
+            document.querySelector('input[type="checkbox"][name="agree"]').click();
         }
+        // @ts-ignore
+        document.querySelector('input[type="submit"][value="Continue"]').click();
 
     }, user);
 
-
-    // @ts-ignore
-    document.querySelector('input[type="submit"][value="Continue"]').click();
-
     console.log('User was created: ', user);
+
 }
