@@ -27,6 +27,7 @@
   "dependencies": {
     "@types/faker": "^5.1.7",
     "@wdio/cli": "^7.0.9",
-    "faker": "^5.4.0"
+    "faker": "^5.4.0",
+    "node-fetch": "^2.6.1"
   }
 }

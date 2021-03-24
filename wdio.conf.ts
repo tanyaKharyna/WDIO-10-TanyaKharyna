@@ -1,3 +1,5 @@
+import {customCommands} from './utils/customCommands/index';
+
 export const config = {
     //
     // ====================
@@ -69,7 +71,7 @@ export const config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'info',
+    logLevel: 'silent',
     //
     // Set specific log levels per logger
     // loggers:
@@ -181,8 +183,17 @@ export const config = {
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {Object}         browser      instance of created browser/device session
      */
-    // before: function (capabilities, specs) {
-    // },
+
+
+    before: function (capabilities, specs) {
+        customCommands.forEach(registerCommand => registerCommand());
+
+        beforeEach(function () {
+            console.log('Global Before test called');
+            browser.url('/');
+        });
+    },
+
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name
@@ -198,9 +209,10 @@ export const config = {
     // },
     /**
      * Function to be executed before a test (in Mocha/Jasmine) starts.
-     */
-    beforeTest: function (test, context) {
-        browser.url('/');},
+     *beforeTest: function (test, context) {
+        browser.url('/');
+    }
+    ,*/
     /**
      * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
      * beforeEach in Mocha)
@@ -219,8 +231,6 @@ export const config = {
     afterTest: function(test, context, { error, result, duration, passed, retries }) {
         browser.reloadSession();
     },
-
-
     /**
      * Hook that gets executed after the suite has ended
      * @param {Object} suite suite details

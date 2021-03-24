@@ -1,5 +1,5 @@
 import *as faker from 'faker';
-import { App } from '../../../application/application';
+import { App } from '../../application/application';
 
 describe('REGISTERED USERS can add items to the cart, the comparison, the wishlish', function() {
 

@@ -1,6 +1,5 @@
-import { App } from "../../../application/application";
-import {registerUserWithScript} from "../../../utils/registerUser.script";
-import *as faker from 'faker';
+import { App } from "../../application/application";
+
 
 describe("Items search", function() {
     it("should show results in case multiple items matches", function() {

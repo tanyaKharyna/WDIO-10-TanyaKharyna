@@ -1,4 +1,4 @@
-import { App } from "../../../application/application";
+import { App } from "../../application/application";
 import*as faker from 'faker';
 
 describe('Items checkout', function() {
