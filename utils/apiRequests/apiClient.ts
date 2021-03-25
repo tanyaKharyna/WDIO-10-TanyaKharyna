@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 
 export class ApiClient {
 
-    createNewUser(email: string) {
+    registerNewUser(email: string) {
         browser.call(async () => {
             await fetch("http://93.126.97.71:10082/index.php?route=account/register", {
                 "headers": {

@@ -19,7 +19,7 @@ export const config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './test/specs/homeworkNo6/**/executeJS.spec.ts'
+        './test/specs/**/**/**.spec.ts'
         //'./test/specs/**/returnCertificateContactForms.spec.ts'
 
         //test\specs\returnCertificateContactForms.spec.ts

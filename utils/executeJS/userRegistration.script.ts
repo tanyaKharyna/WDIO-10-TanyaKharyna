@@ -1,4 +1,4 @@
-export class ExecuteJsScripts {
+export class UserRegistrationScripts {
 
     registerUserWithScript(data: {
     firstName: string;
@@ -8,6 +8,8 @@ export class ExecuteJsScripts {
     telephone: string,
     acceptTermsAndConditions: boolean,
 }){
+        browser.url('/index.php?route=account/register');
+
         const user = new function(){
             this.firstName = data.firstName;
             this.lastName = data.lastName;

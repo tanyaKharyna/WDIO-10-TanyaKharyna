@@ -1,6 +1,5 @@
 import { App } from "../../application/application";
 
-
 describe("Items search", function() {
     it("should show results in case multiple items matches", function() {
         const app = new App();

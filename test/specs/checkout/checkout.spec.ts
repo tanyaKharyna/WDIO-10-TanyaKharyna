@@ -1,4 +1,4 @@
-import { App } from "../../application/application";
+import { App } from "../../../application/application";
 import*as faker from 'faker';
 
 describe('Items checkout', function() {
@@ -41,6 +41,7 @@ describe('Items checkout', function() {
             timeoutMsg: "Expected Confirmation page to be visible"
         });
     });
+
 
     it('can be purchased by registered user',function(){
         const app = new App();
