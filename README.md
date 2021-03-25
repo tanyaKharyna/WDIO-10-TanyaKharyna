@@ -9,7 +9,7 @@ If you want to learn about this topic and happen to know Russian, I highly rec
 
 ### Application under test
 
-you can brouuse AUT here http://93.126.97.71:10082/
+you can browse AUT here http://93.126.97.71:10082/
 
 ### Features:
 * WebdriverIO v.7
