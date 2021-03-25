@@ -7,6 +7,10 @@ Page Components is oftentimes known by names Page Fragment, Page Elements, HTML 
 
 If you want to learn about this topic and happen to know Russian, I highly recommend watching this [talk](https://www.youtube.com/watch?v=aSmTwARoPJA) by Oleksandr Khotemskyi.
 
+# Application under test
+
+you can brouuse AUT here http://93.126.97.71:10082/
+
 Features:
 * WebdriverIO v.7
 * TypeScript
