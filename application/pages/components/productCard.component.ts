@@ -1,10 +1,10 @@
-export class ProductCartComponent {
+export class ProductCardComponent {
 
     constructor(private root: WebdriverIO.Element){
     }
 
     title() {
-        return this.root.$('h4').getText();
+        return this.root.$('h4 a').getText();
     }
 
     addToCart() {
@@ -26,7 +26,6 @@ export class ProductCartComponent {
     }
 
     continue() {
-        browser.pause(500);
         const checkoutButton = $('div.pull-right a');
         expect(checkoutButton).toBeClickable({ message: 'Expected Continue button to be visible' });
         checkoutButton.click();

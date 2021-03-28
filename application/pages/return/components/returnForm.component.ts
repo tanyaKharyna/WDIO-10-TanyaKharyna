@@ -70,7 +70,6 @@ export class ReturnFormComponent {
         this.setProductCode(data.productCode);
         this.returnReasons.orderError();
         this.setComment(data.comment);
-        browser.pause(6000);
         this.continue();
     }
 }

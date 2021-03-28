@@ -19,10 +19,15 @@ export const config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './test/specs/**/**/**.spec.ts'
-        //'./test/specs/**/returnCertificateContactForms.spec.ts'
-
-        //test\specs\returnCertificateContactForms.spec.ts
+        './test/specs/**/**/cart.spec.ts',
+        './test/specs/**/**/checkout.spec.ts',
+        './test/specs/**/**/productPage.spec.ts',
+        './test/specs/**/**/contactUs.spec.ts',
+        './test/specs/**/**/giftCertificate.spec.ts',
+        './test/specs/**/**/returnCertificate.spec.ts',
+        './test/specs/**/**/comparison.spec.ts',
+        './test/specs/**/**/search.spec.ts',
+        './test/specs/**/**/wishlist.spec.ts',
     ],
     // Patterns to exclude.
     exclude: [
@@ -44,7 +49,7 @@ export const config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 10,
+    maxInstances: 1,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:

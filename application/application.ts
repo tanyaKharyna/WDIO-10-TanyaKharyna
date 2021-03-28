@@ -1,12 +1,14 @@
 import { ConfirmationPage } from "./pages/checkoutPages/confirmation.page";
 import { CheckoutPage } from "./pages/checkoutPages/index";
 import { HomePage } from "./pages/home/home.page";
-import { ProductCategoryPage } from "./pages/productCategoryPage";
+import { ProductCategoryPage } from "./pages/productCategory.page";
 import { ReturnPage } from "./pages/return/return.page";
 import {RegisterAccountPage} from "./pages/registerAccount&login/registerAccount.page";
 import { CertificatePage } from "./pages/certificate/certificate.page";
 import { ContactUsPage } from "./pages/contactUs.page";
 import { SearchResultPage } from "./pages/search/searchResult.page";
+import { CheckoutCartPage } from "./pages/checkoutCart/checkoutCart.page";
+import { ProductPage } from "./pages/productPage/product.page";
 
 export class App {
     home: HomePage
@@ -18,6 +20,8 @@ export class App {
     certificatePage: CertificatePage
     contactUsPage: ContactUsPage
     searchResulsPage: SearchResultPage
+    checkoutCartPage: CheckoutCartPage
+    productPage: ProductPage
 
     constructor(){
         this.home = new HomePage();
@@ -29,6 +33,8 @@ export class App {
         this.certificatePage = new CertificatePage();
         this.contactUsPage = new ContactUsPage();
         this.searchResulsPage = new SearchResultPage();
+        this.checkoutCartPage = new CheckoutCartPage();
+        this.productPage = new ProductPage();
     }
 
 }

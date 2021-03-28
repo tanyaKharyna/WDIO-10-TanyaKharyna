@@ -1,10 +1,10 @@
 import *as faker from 'faker';
 import { App } from '../../application/application';
-//import { execute } from '../../utils/executeJS/index';
 import {ExecuteJsScripts} from '../../utils/executeJS/index';
+import { itemsForSale } from '../../data/itemsForSale';
 
 
-describe('REGISTERED USERS can add items to the wishlish', function() {
+describe.only('REGISTERED USERS can add items to the wishlish', function() {
 
     beforeEach(function(){
 
@@ -19,37 +19,31 @@ describe('REGISTERED USERS can add items to the wishlish', function() {
 
     it('can be added to wishlist', function () {
         const app = new App();
-        app.home.openAllForCategory('MP3 Players');
-        const ipodNano= app.productCategory.products.find(product => product.title() === 'iPod Nano');
-        expect(ipodNano).toBeDefined();
+        app.home.openCategory(itemsForSale[7].category);
+        const palmTreoPro= app.productCategory.products.find(product => product.title() === itemsForSale[7].name);
+        expect(palmTreoPro).toBeDefined();
 
-        ipodNano.addToWishlist();
-        expect(app.productCategory.successIcon).toBeDisplayed();
+        palmTreoPro.addToWishlist();
 
+        expect(app.productCategory.successMessage.sucessIcon).toBeDisplayed();
+        expect(app.productCategory.successMessage.linkToWishlist).toBeDisplayed();
     });
 
 });
 
 describe('GUESTS can add items to the wishlish', function() {
 
-    it('can be selected for comparison by guest', function () {
-        const app = new App();
-        app.home.openAllForCategory('MP3 Players');
-        const ipodClassic = app.productCategory.products.find(product => product.title() === 'iPod Classic');
-        expect(ipodClassic).toBeDefined();
-
-        ipodClassic.compareThisProduct();
-        expect(app.productCategory.successIcon).toBeDisplayed();
-    });
-
     it('can be added to cart by guest', function () {
         const app = new App();
-        app.home.openAllForCategory('MP3 Players');
+        app.home.openAllForCategory(itemsForSale[8].category);
 
-        const ipodNano= app.productCategory.products.find(product => product.title() === 'iPod Nano');
-        expect(ipodNano).toBeDefined();
+        const sonyVaio= app.productCategory.products.find(product => product.title() === itemsForSale[8].name);
+        expect(sonyVaio).toBeDefined();
 
-        ipodNano.addToCart();
-        expect(app.productCategory.successIcon).toBeDisplayed();
+        sonyVaio.addToWishlist();
+
+        expect(app.productCategory.successMessage.sucessIcon).toBeDisplayed();
+        expect(app.productCategory.successMessage.linkToWishlist).toBeDisplayed();
+        expect(app.productCategory.successMessage.linkToWishlist).toBeClickable();
     });
 });

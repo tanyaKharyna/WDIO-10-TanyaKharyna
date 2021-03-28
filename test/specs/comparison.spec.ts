@@ -1,8 +1,7 @@
 import *as faker from 'faker';
 import { App } from '../../application/application';
-//import { execute } from '../../utils/executeJS/index';
 import {ExecuteJsScripts} from '../../utils/executeJS/index';
-
+import { itemsForSale } from '../../data/itemsForSale';
 
 describe('REGISTERED USERS can add items to the comparison', function() {
 
@@ -19,26 +18,33 @@ describe('REGISTERED USERS can add items to the comparison', function() {
 
     it('can be selected for comparison by registered user', function () {
         const app = new App();
-        app.home.openAllForCategory('MP3 Players');
-        const ipodNano= app.productCategory.products.find(product => product.title() === 'iPod Nano');
-        expect(ipodNano).toBeDefined();
+        app.home.openAllForCategory(itemsForSale[4].category);
 
-        ipodNano.compareThisProduct();
-        expect(app.productCategory.successIcon).toBeDisplayed();
+        const ipodShuffle= app.productCategory.products.find(product => product.title() === itemsForSale[4].name);
+        expect(ipodShuffle).toBeDefined();
+
+        ipodShuffle.compareThisProduct();
+
+        expect(app.productCategory.successMessage.sucessIcon).toBeDisplayed();
+        expect(app.productCategory.successMessage.linkToComparePage).toBeDisplayed();
+        expect(app.productCategory.successMessage.linkToComparePage).toBeClickable();
     });
 
 });
 
-describe('GUESTS can add items to the cart, the comparison, the wishlish', function() {
+describe.only('GUESTS can add items to the cart, the comparison, the wishlish', function() {
 
     it('can be selected for comparison by guest', function () {
         const app = new App();
-        app.home.openAllForCategory('MP3 Players');
-        const ipodClassic = app.productCategory.products.find(product => product.title() === 'iPod Classic');
-        expect(ipodClassic).toBeDefined();
+        app.home.openCategory(itemsForSale[0].category);
 
-        ipodClassic.compareThisProduct();
-        expect(app.productCategory.successIcon).toBeDisplayed();
+        const htcPhone= app.productCategory.products.find(product => product.title() === itemsForSale[0].name);
+        expect(htcPhone).toBeDefined();
+        htcPhone.compareThisProduct();
+
+        expect(app.productCategory.successMessage.sucessIcon).toBeDisplayed();
+        expect(app.productCategory.successMessage.linkToComparePage).toBeDisplayed();
+        expect(app.productCategory.successMessage.linkToComparePage).toBeClickable();
     });
 
 });

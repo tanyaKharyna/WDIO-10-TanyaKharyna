@@ -1,7 +1,7 @@
 export class UserRegistrationScripts {
 
     registerUserWithScript(data: {
-    firstName: string;
+    firstName: string,
     lastName: string,
     email: string,
     password: string,
@@ -43,18 +43,3 @@ export class UserRegistrationScripts {
     }
 
 }
-
-/*
-class Animal {
-  name: string = 'default value';
-  group: string = 'default value';
-
-  constructor(data: Partial<Animal> = {}) {
-    Object.assign(this, data)
-  }
-
-  echo() {
-    return `My name is ${this.name}, I'm from: ${this.group}`;
-  }
-}
-*/

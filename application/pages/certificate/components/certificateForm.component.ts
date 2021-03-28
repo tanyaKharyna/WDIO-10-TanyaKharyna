@@ -5,7 +5,6 @@ export class CerfiticateFormComponent {
     }
 
     continue() {
-        browser.pause(500);
         const continueButton = this.root.$('input[type="submit"][value="Continue"]');
         expect(continueButton).toBeClickable({ message: 'Expected Continue button to be visible' });
         continueButton.click();
@@ -42,7 +41,6 @@ export class CerfiticateFormComponent {
         this.root.$('#input-message').setValue(data.message);
         this.root.$('input[name="agree"]').click();
         this.chooseBirthdayTheme();
-        browser.pause(5000);
         this.continue();
     }
 

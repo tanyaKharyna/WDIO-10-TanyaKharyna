@@ -4,8 +4,9 @@ export class TopLinks {
     }
 
     openCheckout() {
-        this.root.$('a[title="Checkout"]').click();
-        browser.pause(1000);
+        const link = this.root.$('a[title="Checkout"]');
+        expect(link).toBeDisplayed();
+        link.click();
     }
 
     openSignUpPage() {
