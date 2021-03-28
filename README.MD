@@ -24,10 +24,6 @@ Install the dependencies:
 ```bash
 npm install
 ```
-Compile TypeScript:
-```bash
-npm run build
-```
 Run e2e tests:
 
 ```bash
