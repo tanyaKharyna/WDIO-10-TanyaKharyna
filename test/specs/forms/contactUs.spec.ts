@@ -15,5 +15,4 @@ describe("Contact us form", function() {
             message: 'Expected to have "/success" in the URL after submitting the form'});
     });
 
-
 });

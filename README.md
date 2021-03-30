@@ -16,7 +16,6 @@ you can browse AUT here http://93.126.97.71:10082/
 * [Expect-WebdriverIO](https://github.com/webdriverio/expect-webdriverio)
 * Page Fragment, Page Object Pattern
 * EsLint
-* AllureReport (in progress)
  
  ### :computer: Installation
 
@@ -24,10 +23,6 @@ Install the dependencies:
 
 ```bash
 npm install
-```
-Compile TypeScript:
-```bash
-npm run build
 ```
 Run e2e tests:
 
