@@ -18,33 +18,42 @@ describe('REGISTERED USERS can add items to the comparison', function() {
 
     it('can be selected for comparison by registered user', function () {
         const app = new App();
-        app.home.openAllForCategory(itemsForSale[4].category);
+        const ipodShuffle = itemsForSale.find(item => item.name === 'iPod Shuffle');
 
-        const ipodShuffle= app.productCategory.products.find(product => product.title() === itemsForSale[4].name);
-        expect(ipodShuffle).toBeDefined();
+        app.home.openAllForCategory(ipodShuffle.category);
 
-        ipodShuffle.compareThisProduct();
+        const itemToAdd = app.productCategory.products.find(product => product.title() ===  ipodShuffle.name);
+        expect(itemToAdd).toBeDefined();
+        itemToAdd.compareThisProduct();
 
-        expect(app.productCategory.successMessage.sucessIcon).toBeDisplayed();
-        expect(app.productCategory.successMessage.linkToComparePage).toBeDisplayed();
-        expect(app.productCategory.successMessage.linkToComparePage).toBeClickable();
+        expect(app.productCategory.successMessage.sucessIcon).toBeDisplayed({
+            message: '[Product Page]: Expected Sucess icon to be visible'
+        });
+        expect(app.productCategory.successMessage.linkToComparePage).toBeClickable({
+            message: '[Product Page]: Expected link to the ComparePage from the success message to be visible and clickable'
+        });
     });
 
 });
 
-describe.only('GUESTS can add items to the cart, the comparison, the wishlish', function() {
+describe('GUESTS can add items to the cart, the comparison, the wishlish', function() {
 
     it('can be selected for comparison by guest', function () {
         const app = new App();
-        app.home.openCategory(itemsForSale[0].category);
+        const ipodClassic = itemsForSale.find(item => item.name === 'iPod Classic');
 
-        const htcPhone= app.productCategory.products.find(product => product.title() === itemsForSale[0].name);
-        expect(htcPhone).toBeDefined();
-        htcPhone.compareThisProduct();
+        app.home.openAllForCategory(ipodClassic.category);
 
-        expect(app.productCategory.successMessage.sucessIcon).toBeDisplayed();
-        expect(app.productCategory.successMessage.linkToComparePage).toBeDisplayed();
-        expect(app.productCategory.successMessage.linkToComparePage).toBeClickable();
+        const itemToAdd = app.productCategory.products.find(product => product.title() ===  ipodClassic.name);
+        expect(itemToAdd).toBeDefined();
+        itemToAdd.compareThisProduct();
+
+        expect(app.productCategory.successMessage.sucessIcon).toBeDisplayed({
+            message: '[Product Page]: Expected Sucess icon to be visible'
+        });
+        expect(app.productCategory.successMessage.linkToComparePage).toBeClickable({
+            message: '[Product Page]: Expected link to the ComparePage from the success message to be visible and clickable'
+        });
     });
 
 });

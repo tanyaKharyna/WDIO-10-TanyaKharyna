@@ -15,4 +15,12 @@ export class ItemsFoundComponent {
         expect(noResultsMsg).toBeDisplayed({message: 'Expected "No results found" messsage to be visible'});
     }
 
+    get noResultsMessage(): WebdriverIO.Element {
+        return this.root.$('p=There is no product that matches the search criteria.');
+    }
+
+    get results(): WebdriverIO.Element [] {
+        return this.root.$$('div.product-layout.product-grid h4 a');
+    }
+
 }

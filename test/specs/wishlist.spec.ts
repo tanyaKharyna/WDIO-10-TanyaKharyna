@@ -19,31 +19,42 @@ describe.only('REGISTERED USERS can add items to the wishlish', function() {
 
     it('can be added to wishlist', function () {
         const app = new App();
-        app.home.openCategory(itemsForSale[7].category);
-        const palmTreoPro= app.productCategory.products.find(product => product.title() === itemsForSale[7].name);
-        expect(palmTreoPro).toBeDefined();
+        const palmTreoPro = itemsForSale.find(item => item.name === 'Palm Treo Pro');
 
-        palmTreoPro.addToWishlist();
+        app.home.openCategory(palmTreoPro.category);
 
-        expect(app.productCategory.successMessage.sucessIcon).toBeDisplayed();
-        expect(app.productCategory.successMessage.linkToWishlist).toBeDisplayed();
+        const itemToAdd = app.productCategory.products.find(product => product.title() ===  palmTreoPro.name);
+        expect(itemToAdd).toBeDefined();
+        itemToAdd.addToWishlist();
+
+        expect(app.productCategory.successMessage.sucessIcon).toBeDisplayed({
+            message: '[Product Page]: Expected Sucess icon to be visible'
+        });
+        expect(app.productCategory.successMessage.linkToWishlist).toBeDisplayed({
+            message: '[Product Page]: Expected link to the Wishlist page from the success message to be visible and clickable'
+        });
     });
 
 });
 
 describe('GUESTS can add items to the wishlish', function() {
 
-    it('can be added to cart by guest', function () {
+    it.only('can be added to wishlist by guest', function () {
         const app = new App();
-        app.home.openAllForCategory(itemsForSale[8].category);
+        const sonyVAIO = itemsForSale.find(item => item.name === 'Sony VAIO');
 
-        const sonyVaio= app.productCategory.products.find(product => product.title() === itemsForSale[8].name);
-        expect(sonyVaio).toBeDefined();
+        app.home.openAllForCategory(sonyVAIO.category);
 
-        sonyVaio.addToWishlist();
+        const itemToAdd = app.productCategory.products.find(product => product.title() ===  sonyVAIO.name);
+        expect(itemToAdd).toBeDefined();
+        itemToAdd.addToWishlist();
 
-        expect(app.productCategory.successMessage.sucessIcon).toBeDisplayed();
-        expect(app.productCategory.successMessage.linkToWishlist).toBeDisplayed();
-        expect(app.productCategory.successMessage.linkToWishlist).toBeClickable();
+        expect(app.productCategory.successMessage.sucessIcon).toBeDisplayed({
+            message: '[Product Page]: Expected Sucess icon to be visible'
+        });
+        expect(app.productCategory.successMessage.linkToWishlist).toBeClickable({
+            message: '[Product Page]: Expected link to the Wishlist page from the success message to be visible and clickable'
+        });
     });
+
 });

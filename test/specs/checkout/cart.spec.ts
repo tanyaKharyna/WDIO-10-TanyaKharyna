@@ -3,39 +3,40 @@ import { App } from '../../../application/application';
 import { itemsForSale } from '../../../data/itemsForSale';
 import { ExecuteJsScripts } from '../../../utils/executeJS/index';
 
-describe('GUESTS can add items to the cart', function() {
+describe.only('GUESTS can add items to the cart', function() {
 
     it('one item can be added to cart by guest', function () {
         const app = new App();
-        app.home.openAllForCategory(itemsForSale[4].category);
+        const ipodShuffle = itemsForSale.find(item => item.name === 'iPod Shuffle');
 
-        const ipodShuffle= app.productCategory.products.find(product => product.title() === itemsForSale[4].name);
-        expect(ipodShuffle).toBeDefined();
+        app.home.openAllForCategory(ipodShuffle.category);
 
-        ipodShuffle.addToCart();
-        expect(app.productCategory.successMessage.linkToCart).toBeDisplayed();
+        const itemToAdd = app.productCategory.products.find(product => product.title() ===  ipodShuffle.name);
+        expect(itemToAdd).toBeDefined();
+        itemToAdd.addToCart();
+
 
         app.checkoutCartPage.open();
         expect(app.checkoutCartPage.shoppingCart.quantity).toEqual(1);
-        expect(app.checkoutCartPage.shoppingCart.unitPriceItem).toEqual([itemsForSale[4].price]);
-        expect(app.checkoutCartPage.shoppingCart.totalPriceItem).toEqual([itemsForSale[4].price]);
+        expect(app.checkoutCartPage.shoppingCart.unitPriceItem).toEqual([ipodShuffle.price]);
+        expect(app.checkoutCartPage.shoppingCart.totalPriceItem).toEqual([ipodShuffle.price]);
     });
 
     it('two different items can be added to cart by guest', function () {
         const app = new App();
-        app.home.openCategory(itemsForSale[0].category);
+        const htcPhone = itemsForSale.find(item => item.name === 'HTC Touch HD');
+        const iPhone  = itemsForSale.find(item => item.name === 'iPhone');
 
-        const htcPhone= app.productCategory.products.find(product => product.title() === itemsForSale[0].name);
-        expect(htcPhone).toBeDefined();
-        htcPhone.addToCart();
+        app.home.openCategory(htcPhone.category);
 
+        const firstItem = app.productCategory.products.find(product => product.title() ===  htcPhone.name);
+        firstItem.addToCart();
 
-        const iphonePhone = app.productCategory.products.find(product => product.title() === itemsForSale[1].name);
-        expect(iphonePhone).toBeDefined();
-        iphonePhone.addToCart();
+        const secondItem = app.productCategory.products.find(product => product.title() ===  iPhone.name);
+        secondItem.addToCart();
 
         app.checkoutCartPage.open();
-        const expectedTotalOfOrder = app.checkoutCartPage.shoppingCart.getExpectedTotal(itemsForSale[0].price, itemsForSale[1].price);
+        const expectedTotalOfOrder = app.checkoutCartPage.shoppingCart.getExpectedTotal(htcPhone.price, iPhone.price);
         const actualTotal = app.checkoutCartPage.totalAmmount.getNumericTotal();
 
         expect(app.checkoutCartPage.shoppingCart.quantity).toEqual(2);
@@ -60,27 +61,36 @@ describe('REGISTERED USERS can add items to the cart', function() {
 
     it('should show success message if user added item to cart', function () {
         const app = new App();
-        app.home.openAllForCategory(itemsForSale[3].category);
+        const ipodNano  = itemsForSale.find(item => item.name === 'iPod Nano');
 
-        const ipodNano= app.productCategory.products.find(product => product.title() === itemsForSale[3].name);
-        expect(ipodNano).toBeDefined();
+        app.home.openCategory(ipodNano.category);
 
-        ipodNano.addToCart();
-        expect(app.productCategory.successMessage.linkToCart).toBeDisplayed();
-        expect(app.productCategory.successMessage.sucessIcon).toBeDisplayed();
+        const itemToAdd = app.productCategory.products.find(product => product.title() ===  ipodNano.name);
+
+        itemToAdd.addToCart();
+
+        expect(app.productCategory.successMessage.linkToCart).toBeDisplayed({
+            message: 'Expected thelink to cart to be visible'
+        });
+        expect(app.productCategory.successMessage.sucessIcon).toBeDisplayed({
+            message: 'Expected Sucess icon to be visible'
+        });
     });
 
     it('should save item added to the cart on shopping cart page', function () {
         const app = new App();
-        app.home.openAllForCategory(itemsForSale[6].category);
-        const macBook= app.productCategory.products.find(product => product.title() === itemsForSale[6].name);
-        expect(macBook).toBeDefined();
+        const macBook = itemsForSale.find(item => item.name === 'MacBook');
 
-        macBook.addToCart();
+        app.home.openAllForCategory(macBook.category);
+
+        const itemToAdd = app.productCategory.products.find(product => product.title() ===  macBook.name);
+        expect(itemToAdd).toBeDefined();
+        itemToAdd.addToCart();
+
         app.productCategory.successMessage.goToCartFromMessage();
 
-        expect(app.checkoutCartPage.shoppingCart.unitPriceItem).toEqual([itemsForSale[6].price]);
-        expect(app.checkoutCartPage.shoppingCart.totalPriceItem).toEqual([itemsForSale[6].price]);
+        expect(app.checkoutCartPage.shoppingCart.unitPriceItem).toEqual([macBook.price]);
+        expect(app.checkoutCartPage.shoppingCart.totalPriceItem).toEqual([macBook.price]);
     });
 
 });

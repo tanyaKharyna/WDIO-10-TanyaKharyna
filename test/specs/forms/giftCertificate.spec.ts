@@ -13,9 +13,8 @@ describe("Gift Certificate", function() {
             message: faker.lorem.sentence(22),
         } );
 
-        const title = $('#content h1');
-        expect(browser).toHaveUrlContaining('/voucher/success');
-        expect(title).toHaveText('Purchase a Gift Certificate');
+        expect(browser).toHaveUrlContaining('/voucher/success', {
+            message: 'Expected to have "/success" in the URL after submitting the form'});
     });
 
 });

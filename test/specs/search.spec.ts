@@ -8,6 +8,10 @@ describe("Items search", function() {
         app.home.searchBar.search(searchStr);
 
         app.searchResulsPage.itemsFound.checkSearchResultIsCorrect(searchStr);
+        app.searchResulsPage.itemsFound.results.forEach(result => {
+            expect(result).toHaveTextContaining(searchStr, {
+                message: `[Search Results]: Expected fo find ${searchStr} in all search results`});
+        });
     });
 
     it("should redirect to 'no matching results' in case no items matched", function() {
@@ -17,7 +21,9 @@ describe("Items search", function() {
         app.home.searchBar.search(searchStr);
 
         app.searchResulsPage.itemsFound.checkSearchResultIsEmpty();
-
+        expect(app.searchResulsPage.itemsFound.results).toBeElementsArrayOfSize(0, {
+            message : '[Search Results]: Expected to receive 0 search results'
+        });
     });
 
 });

@@ -8,12 +8,13 @@ describe('Items checkout shoul work as expected', function() {
 
     it('can be purchased by guest', function() {
         const app = new App();
+        const ipodShuffle = itemsForSale.find(item => item.name === 'iPod Shuffle');
 
-        app.home.openAllForCategory(itemsForSale[4].category);
+        app.home.openCategory(ipodShuffle.category);
 
-        const iPodShuffle = app.productCategory.products.find(product => product.title() === itemsForSale[4].name);
-        expect(iPodShuffle).toBeDefined();
-        iPodShuffle.addToCart();
+        const itemToAdd = app.productCategory.products.find(product => product.title() ===  ipodShuffle.name);
+        expect(itemToAdd).toBeDefined();
+        itemToAdd.addToCart();
 
         app.checkout.open();
 
@@ -47,11 +48,13 @@ describe('Items checkout shoul work as expected', function() {
 
     it('can purchased by guest with different billing and shipping addresses',function(){
         const app = new App();
-        app.home.openAllForCategory(itemsForSale[2].category);
+        const ipodClassic = itemsForSale.find(item => item.name === 'iPod Classic');
 
-        const ipodClassic= app.productCategory.products.find(product => product.title() === itemsForSale[2].name);
-        expect(ipodClassic).toBeDefined();
-        ipodClassic.addToCart();
+        app.home.openAllForCategory(ipodClassic.category);
+
+        const itemToAdd = app.productCategory.products.find(product => product.title() === ipodClassic.name);
+        expect(itemToAdd).toBeDefined();
+        itemToAdd.addToCart();
 
         app.checkout.open();
 
@@ -98,11 +101,13 @@ describe('Items checkout shoul work as expected', function() {
 
     it('can be purchased if user registers',function(){
         const app = new App();
-        app.home.openCategory(itemsForSale[0].category);
+        const htcPhone = itemsForSale.find(item => item.name === 'HTC Touch HD');
 
-        const htcPhone= app.productCategory.products.find(product => product.title() === itemsForSale[0].name);
-        expect(htcPhone).toBeDefined();
-        htcPhone.addToCart();
+        app.home.openAllForCategory(htcPhone.category);
+
+        const itemToAdd = app.productCategory.products.find(product => product.title() === htcPhone.name);
+        expect(itemToAdd).toBeDefined();
+        itemToAdd.addToCart();
 
         app.checkout.open();
 

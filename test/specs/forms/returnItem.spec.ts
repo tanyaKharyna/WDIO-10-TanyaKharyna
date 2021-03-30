@@ -17,7 +17,8 @@ describe("Product return", function() {
             productCode:  faker.commerce.productAdjective(),
             comment: faker.lorem.sentence(22),
         });
-        expect(browser).toHaveUrlContaining('/return/success');
+        expect(browser).toHaveUrlContaining('/return/success', {
+            message: 'Expected to have "/success" in the URL after submitting the form'});
     });
 
 });

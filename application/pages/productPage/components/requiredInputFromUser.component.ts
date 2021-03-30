@@ -20,7 +20,7 @@ export class RequiredInputFromUserComponent {
     setText(text: string ) {
         const textField = this.root.$('[placeholder="Textarea"]');
         expect(textField).toBeVisible({
-            message: '[Product page]: Expected Quantity input to be shown'
+            message: '[Product page]: Expected the input for Comment to be shown'
         });
         textField.setValue(text);
     }
@@ -35,7 +35,7 @@ export class RequiredInputFromUserComponent {
                 return false;
             }},
         { timeout: 3000,
-            timeoutMsg:`[Product page]: Expected to select option "${option}"`
+            timeoutMsg:`[Product page]: Expected to select option "${option}" by visible text`
         });
     }
     selectOptionByValue(number: string) {
@@ -52,7 +52,8 @@ export class RequiredInputFromUserComponent {
     }
 
     isErrorShown(): boolean {
-        return this.root.$('div=Select required!').isDisplayed();
+        return this.root.$('div=Select required!').isDisplayed({
+            message: '[Product Page]: Expected the validation message to be visible if user did not provided all required info'});
     }
 
 
